@@ -31,6 +31,7 @@ export class CountryDetailsComponent implements OnInit {
 		return <MessageError>this.response;
 	}
 
+	get countryCodeFormControl() { return this.formGroup.get('countryCode'); }
 	constructor(
 		private _countryService: CountryService,
 		private _snackBar: MatSnackBar,
@@ -42,6 +43,7 @@ export class CountryDetailsComponent implements OnInit {
 	}
 
 	$$getCountry(searchTerm: string) {
+		if (!searchTerm || this.formGroup.invalid) return;
 		this._countryService.getCountry(searchTerm).subscribe((response: Country | MessageError | HttpErrorResponse) => {
 			if (response instanceof HttpErrorResponse) return this._snackBar.open('Error', response.statusText);
 			return this.response = response;
@@ -50,7 +52,7 @@ export class CountryDetailsComponent implements OnInit {
 
 	private _buildForm() {
 		this.formGroup = this._formBuilder.group({
-			countryCode: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2)]))
+			countryCode: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(3)]))
 		});
 	}
 }

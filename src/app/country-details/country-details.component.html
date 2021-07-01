@@ -2,8 +2,14 @@
 <div class="country">
 	<form [formGroup]="formGroup" class="country__search">
   		<mat-form-field appearance="fill">
-    		<mat-label>Favorite food</mat-label>
-    		<input matInput formControlName="countryCode" #countryCode>
+    		<mat-label>ISO Country code</mat-label>
+    		<input matInput formControlName="countryCode"pattern="[a-zA-Z ]*" maxlength="3"  #countryCode>
+			<mat-error *ngIf="countryCodeFormControl?.errors?.minlength">
+				ISO code must be at least 2 characters long
+			</mat-error>
+			<mat-error *ngIf="countryCodeFormControl?.errors?.pattern">
+				ISO code must be in alphabets e.g ab or BRA
+			</mat-error>
   		</mat-form-field>
 		<button mat-stroked-button (click)="$$getCountry(countryCode.value)">search</button>
 	</form>
