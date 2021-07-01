@@ -1,0 +1,47 @@
+@import "mixins";
+@import "variables";
+
+:host {
+	display: block;
+	padding: 2rem;
+
+	.country {
+		@include flex-column(flex-start, flex-start);
+		max-width: $md;
+		min-width: $sm;
+
+		.mat-form-field {
+			width: 100%;
+		}
+
+		&__search {
+			width: 100%;
+		}
+
+		&__details {
+			margin-top: 1rem;
+			width: 100%;
+			border: 1px solid lightblue;
+			padding: 1rem;
+
+			&.warning {
+				border: 1px solid lightcoral;
+			}
+
+			&--heading {
+				font-weight: 600;
+				letter-spacing: 0.2rem;
+			}
+		}
+
+		&__detail {
+			@include flex-row(flex-start, center);
+
+			span {
+				width: 15rem;
+				height: 2rem;
+				padding-right: 0.5rem;
+			}
+		}
+	}
+}

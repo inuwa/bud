@@ -1,0 +1,34 @@
+<header><h2>Get Countries</h2></header>
+<div class="country">
+	<form [formGroup]="formGroup" class="country__search">
+  		<mat-form-field appearance="fill">
+    		<mat-label>Favorite food</mat-label>
+    		<input matInput formControlName="countryCode" #countryCode>
+  		</mat-form-field>
+		<button mat-stroked-button (click)="$$getCountry(countryCode.value)">search</button>
+	</form>
+	<div *ngIf="isCountry" class="country__details">
+		<h3 class="country__details--heading">{{'Country Details' | uppercase }}</h3>
+		<div class="country__detail">
+			<span>Country Name:</span><span>{{ country.name }}</span>
+		</div>
+		<div class="country__detail">
+			<span>Region:</span><span>{{ country.region.value }}</span>
+		</div>
+		<div class="country__detail">
+			<span>Capital City:</span><span>{{ country.capitalCity }}</span>
+		</div>
+		<div class="country__detail">
+			<span>Longitude:</span><span>{{ country.longitude }}</span>
+		</div>
+		<div class="country__detail">
+			<span>Latitude:</span><span>{{ country.latitude }}</span>
+		</div>
+	</div>
+	<div *ngIf="isMessageError" class="country__details warning">
+		<h3 class="country__details--heading">Country Details</h3>
+		<div class="country__detail" *ngFor="let message of messageError.message" >
+			<span>{{ message.key }}: </span><span>{{ message.value}}</span>
+		</div>
+	</div>
+</div>
